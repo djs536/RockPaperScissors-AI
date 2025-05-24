@@ -92,8 +92,9 @@ rpsAI <- function(i = 10, model, random = F) {
     }
   }
   
-  if(n_games > 0) {
-    return(log)
+  if(n_games > 5) {
+    log_adjusted <- log[6:nrow(log),]
+    return(log_adjusted)
   }
   
 }
