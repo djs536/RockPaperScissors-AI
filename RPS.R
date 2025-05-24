@@ -4,19 +4,14 @@
 download.file("https://github.com/djs536/RockPaperScissors-AI/raw/refs/heads/main/rps-model.rds",
               destfile = "rps-model.rds")
 rpsModel <- readRDS("rps-model.rds")
+trainDataAI <- as.matrix(read.csv("https://github.com/djs536/RockPaperScissors-AI/raw/refs/heads/main/trainDataAI.csv")[,2:12])
+colnames(trainDataAI) <- NULL
 
 # Run RPS script with AI and non-AI play functions
 source("https://github.com/djs536/RockPaperScissors-AI/raw/refs/heads/main/rps-game-ai.R")
 
 
-### Step 2: Define storage object for new training data
-if (file.exists("playLog.rds")) {
-  playLog <- readRDS("playLog.rds")
-} else {
-  playLog <- matrix(nrow = 0, ncol = 11)
-}
-
-### Step 3: Define wrapper function to continually append playLog upon exit
+### Step 2: Define wrapper function to continually append trainDataAI upon exit
 play <- function(games = 1000) {
   round1 <- rpsAI(i = games, model = rpsModel)
   Sys.sleep(2)
@@ -24,8 +19,8 @@ play <- function(games = 1000) {
   addAffirm <- ifelse(addAffirm == "n", 0, 1)
 
   if(addAffirm == 1) {
-    playLog <<- rbind(playLog, round1)
-    saveRDS(playLog, "playLog.rds")
+    trainDataAI <<- rbind(trainDataAI, round1)
+    write.csv(trainDataAI, "trainDataAI.csv")
   }
   
   nLoss <- as.vector(table(round1[,10])[1]) / nrow(round1)
@@ -36,6 +31,6 @@ play <- function(games = 1000) {
   
 }
 
-### Step 4: Set up high-play round
+### Step 3: Set up high-play round
 play(1000)
 
