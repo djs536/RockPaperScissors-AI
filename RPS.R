@@ -4,7 +4,13 @@
 download.file("https://github.com/djs536/RockPaperScissors-AI/raw/refs/heads/main/rps-model.rds",
               destfile = "rps-model.rds")
 rpsModel <- readRDS("rps-model.rds")
-trainDataAI <- as.matrix(read.csv("https://github.com/djs536/RockPaperScissors-AI/raw/refs/heads/main/trainDataAI.csv")[,2:12])
+
+if (file.exists("trainDataAI.csv")) {
+  trainDataAI <- as.matrix(read.csv("trainDataAI.csv")[,2:12])
+} else {
+  trainDataAI <- as.matrix(read.csv("https://github.com/djs536/RockPaperScissors-AI/raw/refs/heads/main/trainDataAI.csv")[,2:12])
+}
+
 colnames(trainDataAI) <- NULL
 
 # Run RPS script with AI and non-AI play functions
