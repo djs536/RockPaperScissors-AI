@@ -36,3 +36,6 @@ play <- function(games = 100, x = playLog) {
   
 }
 
+### Step 4: Set up high-play round
+play(1000)
+
