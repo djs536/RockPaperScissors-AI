@@ -22,7 +22,7 @@ play <- function(games = 100, x = playLog) {
   Sys.sleep(2)
   addAffirm <- readline(prompt = "Use games as training data? (Type y or n)")
   addAffirm <- ifelse(addAffirm == "n", 0, 1)
-  print(addAffirm)
+
   if(addAffirm == 1) {
     playLog <<- rbind(playLog, round1)
     saveRDS(playLog, "playLog.rds")
