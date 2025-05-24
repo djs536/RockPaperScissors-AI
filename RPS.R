@@ -17,7 +17,7 @@ if (file.exists("playLog.rds")) {
 }
 
 ### Step 3: Define wrapper function to continually append playLog upon exit
-play <- function(games = 100, x = playLog) {
+play <- function(games = 1000) {
   round1 <- rpsAI(i = games, model = rpsModel)
   Sys.sleep(2)
   addAffirm <- readline(prompt = "Use games as training data? (Type y or n)")
