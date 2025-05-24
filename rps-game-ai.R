@@ -50,8 +50,6 @@ rpsPredictor <- function(hist, model) { # hist = 2x5 matrix; row 1 = plays, row 
 }
 
 
-predictorTestData <- matrix(c(sample(1:3, 5, T), sample(-1:1, 5, T)), ncol = 10)
-rpsPredictor(predictorTestData, rpsModel2)
 
 rpsAI <- function(i = 10, model, random = F) {
   rules <- matrix(c(0, 1, -1,
